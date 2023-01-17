@@ -97,9 +97,9 @@ export const {listTodos, addTask, deleteTask, completeTodo, editTodo} = todoSlic
 
 export const fetchTodos = () => (dispatch) => {
      axios.get(
-        "https://jsonplaceholder.typicode.com/todos?_limit=20"
+        "https://jsonplaceholder.typicode.com/todos"
     ).then(res => {
-        const todos = res.data;
+        const todos = res.data.slice(0,20);
         const localStoragedData = window.localStorage.getItem('todo_save');
         if (localStoragedData) {
             try {
