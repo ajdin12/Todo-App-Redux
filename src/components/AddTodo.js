@@ -1,8 +1,21 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/todoSlice";
 import { TextField } from "@mui/material";
+import styled from 'styled-components';
+
+const DivBox = styled.div`
+    margin-bottom: 30px;
+`;
+const Button = styled.button`
+    border-radius: 50px;
+    background-color: #800080;
+    color: white;
+    position: absolute;
+    margin-top: -17px;
+    margin-left: 300px;
+    padding: 0.50em 1.5em;
+`;
 
 const AddTodo = () => {
     const [input, setInput] = useState('');
@@ -15,6 +28,7 @@ const AddTodo = () => {
     const handleSubmit = () => {
 		dispatch(
 			addTask({
+                id:  Math.floor(Math.random() * 10000),
 				task: input
 			})
 		);
@@ -23,7 +37,7 @@ const AddTodo = () => {
 
     return (
         <div>
-            <div onSubmit={handleSubmit} style={{marginBottom: 30}}>
+            <DivBox onSubmit={handleSubmit}>
                 <TextField 
                     fullWidth
                     type="text" 
@@ -32,9 +46,9 @@ const AddTodo = () => {
                     onChange={handleChange}
                     variant="outlined"
                 />
-            </div>
+            </DivBox>
             <div>
-                <Button onClick={handleSubmit} variant="contained" style={{borderRadius: 50, backgroundColor: '#800080', position: 'absolute', marginTop: -17, marginLeft: 300}}>+ Add Todo</Button>
+                <Button onClick={handleSubmit} variant="contained" >+ Add Todo</Button>
             </div>
        </div>
     );
